@@ -17,7 +17,7 @@ namespace eShop.Domain.Entities
         public Customer(string name, string streetAddress, string city, string state, string zipCode, string country, string documentNumber, string email, string phone)
         {
             DomainValidator.New()
-                .When(string.IsNullOrEmpty(name), "Nome is required")
+                .When(string.IsNullOrEmpty(name), "Name is required")
                 .When(string.IsNullOrEmpty(streetAddress), "Street Address is required")
                 .When(string.IsNullOrEmpty(city), "City is required")
                 .When(string.IsNullOrEmpty(state), "State is required")

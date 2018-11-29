@@ -3,48 +3,44 @@ using Xunit;
 using ExpectedObjects;
 using eShop.Domain.Entities;
 using eShop.Domain.Exceptions;
+using Bogus;
+using eShop.Domain.Test._Builders;
 
 namespace eShop.Domain.Test
 {
     public class CustomerTest
     {
-        private string _name = "Caio Colaiacovo Carneiro da Costa";
-        private string _streetAddress = "195 Avenida Paulista";
-        private string _city = "São Paulo";
-        private string _state = "São Paulo";
-        private string _zipCode = "12000-000";
-        private string _country = "Brazil";
-        private string _documentNumber = "111.111.111-11";
-        private string _email = "myemail@email.com";
-        private string _phone = "+55 11 9999-9999";
+        private Faker faker;
 
-        public CustomerTest() { }
+        public CustomerTest() { 
+            faker = new Faker();
+        }
         
         [Fact]
         public void Should_Create_A_Customer()
         {
             var expectedCustomer = new {
-                Name = _name,
-                StreetAddress = _streetAddress,
-                City = _city,
-                State = _state,
-                ZipCode = _zipCode,
-                Country = _country,
-                DocumentNumber = _documentNumber,
-                Email = _email,
-                Phone = _phone,
+                Name = faker.Name.FullName(),
+                StreetAddress = faker.Address.StreetAddress(),
+                City = faker.Address.City(),
+                State = faker.Address.State(),
+                ZipCode = faker.Address.ZipCode(),
+                Country = faker.Address.Country(),
+                DocumentNumber = faker.Random.Number().ToString(),
+                Email = faker.Person.Email,
+                Phone = faker.Person.Phone,
             };
 
             var customer = new Customer(
-                _name, 
-                _streetAddress, 
-                _city, 
-                _state, 
-                _zipCode, 
-                _country, 
-                _documentNumber, 
-                _email, 
-                _phone);
+                expectedCustomer.Name, 
+                expectedCustomer.StreetAddress, 
+                expectedCustomer.City, 
+                expectedCustomer.State, 
+                expectedCustomer.ZipCode, 
+                expectedCustomer.Country, 
+                expectedCustomer.DocumentNumber, 
+                expectedCustomer.Email, 
+                expectedCustomer.Phone);
 
             expectedCustomer.ToExpectedObject().ShouldMatch(customer);
         }
@@ -52,35 +48,15 @@ namespace eShop.Domain.Test
         [Fact]
         public void Should_Not_Create_A_Customer_Without_Name()
         {
-            var exception = Assert.Throws<DomainException>(() => new Customer(
-                null,
-                _streetAddress,
-                _city,
-                _state,
-                _zipCode,
-                _country,
-                _documentNumber,
-                _email,
-                _phone
-            )).Message;
+            var exception = Assert.Throws<DomainException>(() => CustomerBuilder.New().WithName(null).Build()).Message;
 
-            Assert.Equal("Nome is required", exception);
+            Assert.Equal("Name is required", exception);
         }
 
         [Fact]
         public void Should_Not_Create_A_Customer_Without_StreetAddress()
         {
-            var exception = Assert.Throws<DomainException>(() => new Customer(
-                _name,
-                null,
-                _city,
-                _state,
-                _zipCode,
-                _country,
-                _documentNumber,
-                _email,
-                _phone
-            )).Message;
+            var exception = Assert.Throws<DomainException>(() => CustomerBuilder.New().WithStreetAddress(null).Build()).Message;
 
             Assert.Equal("Street Address is required", exception);
         }
@@ -88,17 +64,7 @@ namespace eShop.Domain.Test
         [Fact]
         public void Should_Not_Create_A_Customer_Without_City()
         {
-            var exception = Assert.Throws<DomainException>(() => new Customer(
-                _name,
-                _streetAddress,
-                null,
-                _state,
-                _zipCode,
-                _country,
-                _documentNumber,
-                _email,
-                _phone
-            )).Message;
+            var exception = Assert.Throws<DomainException>(() => CustomerBuilder.New().WithCity(null).Build()).Message;
 
             Assert.Equal("City is required", exception);
         }
@@ -106,17 +72,7 @@ namespace eShop.Domain.Test
         [Fact]
         public void Should_Not_Create_A_Customer_Without_State()
         {
-            var exception = Assert.Throws<DomainException>(() => new Customer(
-                _name,
-                _streetAddress,
-                _city,
-                null,
-                _zipCode,
-                _country,
-                _documentNumber,
-                _email,
-                _phone
-            )).Message;
+            var exception = Assert.Throws<DomainException>(() => CustomerBuilder.New().WithState(null).Build()).Message;
 
             Assert.Equal("State is required", exception);
         }
@@ -124,17 +80,7 @@ namespace eShop.Domain.Test
         [Fact]
         public void Should_Not_Create_A_Customer_Without_ZipCode()
         {
-            var exception = Assert.Throws<DomainException>(() => new Customer(
-                _name,
-                _streetAddress,
-                _city,
-                _state,
-                null,
-                _country,
-                _documentNumber,
-                _email,
-                _phone
-            )).Message;
+            var exception = Assert.Throws<DomainException>(() => CustomerBuilder.New().WithZipCode(null).Build()).Message;
 
             Assert.Equal("Zip Code is required", exception);
         }
@@ -142,17 +88,7 @@ namespace eShop.Domain.Test
         [Fact]
         public void Should_Not_Create_A_Customer_Without_Country()
         {
-            var exception = Assert.Throws<DomainException>(() => new Customer(
-                _name,
-                _streetAddress,
-                _city,
-                _state,
-                _zipCode,
-                null,
-                _documentNumber,
-                _email,
-                _phone
-            )).Message;
+            var exception = Assert.Throws<DomainException>(() => CustomerBuilder.New().WithCountry(null).Build()).Message;
 
             Assert.Equal("Country is required", exception);
         }
@@ -160,17 +96,7 @@ namespace eShop.Domain.Test
         [Fact]
         public void Should_Not_Create_A_Customer_Without_DocumentNumber()
         {
-            var exception = Assert.Throws<DomainException>(() => new Customer(
-                _name,
-                _streetAddress,
-                _city,
-                _state,
-                _zipCode,
-                _country,
-                null,
-                _email,
-                _phone
-            )).Message;
+            var exception = Assert.Throws<DomainException>(() => CustomerBuilder.New().WithDocumentNumber(null).Build()).Message;
 
             Assert.Equal("Document Number is required", exception);
         }
@@ -178,17 +104,7 @@ namespace eShop.Domain.Test
         [Fact]
         public void Should_Not_Create_A_Customer_Without_Email()
         {
-            var exception = Assert.Throws<DomainException>(() => new Customer(
-                _name,
-                _streetAddress,
-                _city,
-                _state,
-                _zipCode,
-                _country,
-                _documentNumber,
-                null,
-                _phone
-            )).Message;
+            var exception = Assert.Throws<DomainException>(() => CustomerBuilder.New().WithEmail(null).Build()).Message;
 
             Assert.Equal("Email is required", exception);
         }
@@ -196,17 +112,7 @@ namespace eShop.Domain.Test
         [Fact]
         public void Should_Not_Create_A_Customer_Without_Phone()
         {
-            var exception = Assert.Throws<DomainException>(() => new Customer(
-                _name,
-                _streetAddress,
-                _city,
-                _state,
-                _zipCode,
-                _country,
-                _documentNumber,
-                _email,
-                null
-            )).Message;
+            var exception = Assert.Throws<DomainException>(() => CustomerBuilder.New().WithPhone(null).Build()).Message;
 
             Assert.Equal("Phone is required", exception);
         }
