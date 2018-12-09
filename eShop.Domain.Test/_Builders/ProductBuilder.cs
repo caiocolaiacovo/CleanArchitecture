@@ -6,7 +6,6 @@ namespace eShop.Domain.Test._Builders
 {
     public class ProductBuilder
     {
-        private int id;
         private string brand;
         private int categoryId;
         private string description;
@@ -17,17 +16,17 @@ namespace eShop.Domain.Test._Builders
         private ProductBuilder()
         {
             var faker = new Faker();
+            var hash = faker.Random.Hash();
 
-            this.id = faker.Random.Int();
             this.brand = faker.Company.Random.Word();
-            this.categoryId = faker.Random.Int();
+            this.categoryId = faker.Random.Int(0);
             this.description = faker.Lorem.Text();
-            this.price = faker.Random.Decimal(0, 5000);
-            this.title = faker.Lorem.Sentence();
+            this.price = faker.Random.Decimal(1, 1000000);
+            this.title = faker.Commerce.ProductName();
             this.photos = new List<string>() { 
-                $"images/products/${this.id}_1.jpg",
-                $"images/products/${this.id}_2.jpg",
-                $"images/products/${this.id}_3.jpg" 
+                $"images/products/${hash}_1.jpg",
+                $"images/products/${hash}_2.jpg",
+                $"images/products/${hash}_3.jpg" 
             };
         }
 
@@ -36,16 +35,9 @@ namespace eShop.Domain.Test._Builders
             return new ProductBuilder();
         }
 
-        public ProductBuilder WithId(int id)
-        {
-            this.id = id;
-            return this;
-        }
-
         public Product Build()
         {
             return new Product(
-                this.id,
                 this.title,
                 this.description,
                 this.price,

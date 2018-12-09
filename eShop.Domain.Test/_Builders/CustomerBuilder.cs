@@ -1,18 +1,34 @@
+using Bogus;
 using eShop.Domain.Entities;
 
 namespace eShop.Domain.Test._Builders
 {
     public class CustomerBuilder
     {
-        private string _name = "Caio Colaiacovo Carneiro da Costa";
-        private string _streetAddress = "195 Avenida Paulista";
-        private string _city = "São Paulo";
-        private string _state = "São Paulo";
-        private string _zipCode = "12000-000";
-        private string _country = "Brazil";
-        private string _documentNumber = "111.111.111-11";
-        private string _email = "myemail@email.com";
-        private string _phone = "+55 11 9999-9999";
+        private string _name;
+        private string _streetAddress;
+        private string _city;
+        private string _state;
+        private string _zipCode;
+        private string _country;
+        private string _documentNumber;
+        private string _email;
+        private string _phone;
+
+        private CustomerBuilder()
+        {
+            var faker = new Faker();
+
+            _name = faker.Name.FullName();
+            _streetAddress = faker.Address.StreetAddress();
+            _city = faker.Address.City();
+            _state = faker.Address.State();
+            _zipCode = faker.Address.ZipCode();
+            _country = faker.Address.Country();
+            _documentNumber = faker.Random.Number(int.MaxValue).ToString();
+            _email = faker.Person.Email;
+            _phone = faker.Person.Phone;
+        }
 
         public static CustomerBuilder New()
         {
