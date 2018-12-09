@@ -1,8 +1,9 @@
+using System.Collections.Generic;
 using eShop.Domain._Util;
 
 namespace eShop.Domain.Entities
 {
-    public class Customer
+    public class Customer : BaseEntity
     {
         public string Name { get; private set; }
         public string StreetAddress { get; private set; }
@@ -13,6 +14,8 @@ namespace eShop.Domain.Entities
         public string DocumentNumber { get; private set; }
         public string Email { get; private set; }
         public string Phone { get; private set; }
+
+        public virtual ICollection<Order> Orders { get; private set; }
 
         public Customer(string name, string streetAddress, string city, string state, string zipCode, string country, string documentNumber, string email, string phone)
         {
@@ -36,6 +39,8 @@ namespace eShop.Domain.Entities
             this.DocumentNumber = documentNumber;
             this.Email = email;
             this.Phone = phone;
+
+            this.Orders = new List<Order>();
         }
     }
 }
