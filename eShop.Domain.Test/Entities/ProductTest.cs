@@ -70,7 +70,7 @@ namespace eShop.Domain.Test.Entities
             var invalidPrice = -1;
 
             Assert.Throws<DomainException>(() => ProductBuilder.New().WithPrice(invalidPrice).Build())
-                .WithMessage("Price cannot be negative");
+                .WithMessage("Price must be equal or greater than zero");
         }
 
         [Fact]
@@ -86,7 +86,7 @@ namespace eShop.Domain.Test.Entities
         public void Should_Not_Create_Product_With_Invalid_CategoryId(int invalidCategoryId)
         {
             Assert.Throws<DomainException>(() => ProductBuilder.New().WithCategoryId(invalidCategoryId).Build())
-                .WithMessage("CategoryId must be greater than zero");
+                .WithMessage("Category is required");
         }
 
         [Theory]

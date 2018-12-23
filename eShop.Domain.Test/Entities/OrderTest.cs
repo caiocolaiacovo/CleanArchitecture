@@ -80,7 +80,7 @@ namespace eShop.Domain.Test
         {
             var order = OrderBuilder.New().WithOrderItems(listOfOrderItems).Build();   
 
-            Assert.Throws<DomainException>(() => order.AddOrderItem(null)).WithMessage("Parameter 'orderItem' cannot be null");
+            Assert.Throws<DomainException>(() => order.AddOrderItem(null)).WithMessage("OrderItem cannot be null");
         }
 
         [Fact]
