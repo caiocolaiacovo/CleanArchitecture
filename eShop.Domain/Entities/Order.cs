@@ -58,20 +58,11 @@ namespace eShop.Domain.Entities
 
         public void AddOrderItem(OrderItem orderItem)
         {
-            DomainValidator.New().When(orderItem == null, "Parameter 'orderItem' cannot be null");
+            DomainValidator.New().When(orderItem == null, "OrderItem cannot be null");
 
             OrderItems.Add(orderItem);
             CalculateTotalsItems();
         }
-    }
-
-    public class OrderItem : BaseEntity
-    {
-        public int Quantity { get; set; }
-        public Product Product { get; set; }
-        public decimal Subtotal { get; set; }
-        public decimal Discount { get; set; }
-        public decimal Total { get; set; }
     }
 
     public class Payment : BaseEntity

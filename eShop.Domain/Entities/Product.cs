@@ -19,9 +19,9 @@ namespace eShop.Domain.Entities
             DomainValidator.New()
                 .When(string.IsNullOrEmpty(title), "Title is required")
                 .When(string.IsNullOrEmpty(description), "Description is required")
-                .When(price < 0, "Price cannot be negative")
+                .When(price < 0, "Price must be equal or greater than zero")
                 .When(string.IsNullOrEmpty(brand), "Brand is required")
-                .When(categoryId <= 0, "CategoryId must be greater than zero")
+                .When(categoryId <= 0, "Category is required")
                 .When(photos == null, "Photos is required")
                 .When(photos.Count == 0, "Product must have at least one photo");
 
