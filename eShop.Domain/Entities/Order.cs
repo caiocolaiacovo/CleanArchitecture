@@ -28,10 +28,10 @@ namespace eShop.Domain.Entities
             this.CustomerId = customerId;
             this.OrderItems = orderItems;
 
-            CalculateTotalsItems();
+            CalculateTotalItems();
         }
 
-        private void CalculateTotalsItems()
+        private void CalculateTotalItems()
         {
             decimal subtotalItems = 0;
             decimal totalDiscountItems = 0;
@@ -61,8 +61,20 @@ namespace eShop.Domain.Entities
             DomainValidator.New().When(orderItem == null, "OrderItem cannot be null");
 
             OrderItems.Add(orderItem);
-            CalculateTotalsItems();
+            CalculateTotalItems();
         }
+
+        // public void AddShippingCosts(decimal shippingCosts)
+        // {
+        //     ShippingCosts = shippingCosts;
+        //     CalculateOrderTotal();
+        // }
+
+        // public void AddDiscount(decimal discount)
+        // {
+        //     Discount = discount;
+        //     CalculateOrderTotal();
+        // }
     }
 
     public class Payment : BaseEntity

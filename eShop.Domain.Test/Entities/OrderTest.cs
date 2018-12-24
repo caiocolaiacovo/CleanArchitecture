@@ -21,20 +21,16 @@ namespace eShop.Domain.Test
         public OrderTest()
         {
             faker = new Faker();
+            var product = ProductBuilder.New().WithPrice(125).Build();
+            var orderItem = OrderItemBuilder.New().WithQuantity(1).WithProduct(product).WithDiscount(25).Build();
 
             listOfOrderItems = new List<OrderItem>() {
-                new OrderItem() {
-                    Quantity = 1,
-                    Product = ProductBuilder.New().WithPrice(125).Build(),
-                    Subtotal = 125,
-                    Discount = 25,
-                    Total = 100,
-                }
+                orderItem,
             };
         }
 
         [Fact]
-        public void Should_Create_A_Order()
+        public void Should_Create_An_Order()
         {
             var expectedOrder = new {
                 CustomerId = faker.Random.Int(),
@@ -47,13 +43,13 @@ namespace eShop.Domain.Test
         }
 
         [Fact]
-        public void Should_Not_Create_A_Order_Without_CustomerId()
+        public void Should_Not_Create_An_Order_Without_CustomerId()
         {
             Assert.Throws<DomainException>(() => OrderBuilder.New().WithCustomerId(0).Build()).WithMessage("CustomerId is required");
         }
 
         [Fact]
-        public void Should_Not_Create_A_Order_Without_OrderItems()
+        public void Should_Not_Create_An_Order_Without_OrderItems()
         {
             Assert.Throws<DomainException>(() => OrderBuilder.New().WithOrderItems(null).Build()).WithMessage("OrderItems is required");
         }
@@ -93,13 +89,8 @@ namespace eShop.Domain.Test
                 Total = 170m
             };
 
-            var orderItem = new OrderItem() {
-                Quantity = 1,
-                Product = ProductBuilder.New().WithPrice(75).Build(),
-                Subtotal = 75,
-                Discount = 5,
-                Total = 70m,
-            };
+            var product = ProductBuilder.New().WithPrice(75).Build();
+            var orderItem = OrderItemBuilder.New().WithQuantity(1).WithProduct(product).WithDiscount(5).Build();
 
             var order = OrderBuilder.New().WithOrderItems(listOfOrderItems).Build();    
             order.AddOrderItem(orderItem);

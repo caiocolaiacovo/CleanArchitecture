@@ -1,3 +1,5 @@
+using eShop.Domain._Util;
+
 namespace eShop.Domain.Entities
 {
     public class OrderItem : BaseEntity
@@ -7,19 +9,29 @@ namespace eShop.Domain.Entities
         public decimal Subtotal { get; set; }
         public decimal Discount { get; set; }
         public decimal Total { get; set; }
-
-        public OrderItem()
+        
+        public OrderItem(int quantity, Product product, decimal discount)
         {
-            
-        }
+            var domainValidator = DomainValidator.New();
 
-        public OrderItem(int quantity, Product product, decimal subtotal, int discount, decimal total)
-        {
+            domainValidator.When(quantity == 0, "Quantity must be grater than zero")
+                .When(quantity > 100, "Quantity must be less than 100")
+                .When(product == null, "Product is required")
+                .When(discount < 0, "Discount must be greater than zero");
+
             Quantity = quantity;
             Product = product;
-            Subtotal = subtotal;
             Discount = discount;
-            Total = total;
+
+            CalculateTotal();
+
+            domainValidator.When(Total < 0, "Discount cannot be greater than the subtotal of products");
+        }
+        
+        private void CalculateTotal()
+        {
+            Subtotal = Quantity * Product.Price;
+            Total = Subtotal - Discount;
         }
     }
 }
