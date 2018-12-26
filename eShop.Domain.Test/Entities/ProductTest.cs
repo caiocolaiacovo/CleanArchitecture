@@ -23,19 +23,12 @@ namespace eShop.Domain.Test.Entities
         [Fact]
         public void Should_Create_A_Product()
         {
-            var hash = faker.Random.Hash();
-
             var expectedProduct = new {
                 Title = faker.Commerce.ProductName(),
                 Description = faker.Lorem.Text(),
                 Price = faker.Random.Decimal(1, 5000),
                 Brand = faker.Company.Random.Word(),
                 CategoryId = faker.Random.Int(0),
-                Photos = new List<string>() {
-                    $"images/products/${hash}_1.jpg",
-                    $"images/products/${hash}_2.jpg",
-                    $"images/products/${hash}_3.jpg"
-                }
             };
 
             var product = ProductBuilder.New()
@@ -44,7 +37,6 @@ namespace eShop.Domain.Test.Entities
                 .WithPrice(expectedProduct.Price)
                 .WithBrand(expectedProduct.Brand)
                 .WithCategoryId(expectedProduct.CategoryId)
-                .WithPhotos(expectedProduct.Photos)
                 .Build();
 
             expectedProduct.ToExpectedObject().ShouldMatch(product);
@@ -87,18 +79,6 @@ namespace eShop.Domain.Test.Entities
         {
             Assert.Throws<DomainException>(() => ProductBuilder.New().WithCategoryId(invalidCategoryId).Build())
                 .WithMessage("Category is required");
-        }
-
-        [Theory]
-        [InlineData(null, "Photos is required")]
-        [InlineData((object)new string[] {}, "Product must have at least one photo")]
-        public void Should_Not_Create_Product_With_Invalid_Photos(string [] invalidPhotos, string message)
-        {
-            //xUnit workaround
-            var _invalidPhotos = invalidPhotos != null ? invalidPhotos.OfType<string>().ToList() : null;
-
-            Assert.Throws<DomainException>(() => ProductBuilder.New().WithPhotos(_invalidPhotos).Build())
-                .WithMessage(message);
         }
     }
 }

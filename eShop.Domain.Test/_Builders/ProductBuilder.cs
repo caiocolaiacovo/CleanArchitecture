@@ -9,7 +9,6 @@ namespace eShop.Domain.Test._Builders
         private string brand;
         private int categoryId;
         private string description;
-        private List<string> photos;
         private decimal price;
         private string title;
 
@@ -23,11 +22,6 @@ namespace eShop.Domain.Test._Builders
             this.description = faker.Lorem.Text();
             this.price = faker.Random.Decimal(1, 1000000);
             this.title = faker.Commerce.ProductName();
-            this.photos = new List<string>() { 
-                $"images/products/${hash}_1.jpg",
-                $"images/products/${hash}_2.jpg",
-                $"images/products/${hash}_3.jpg" 
-            };
         }
 
         public static ProductBuilder New()
@@ -42,8 +36,7 @@ namespace eShop.Domain.Test._Builders
                 this.description,
                 this.price,
                 this.brand,
-                this.categoryId,
-                this.photos
+                this.categoryId
             );
         }
 
@@ -62,12 +55,6 @@ namespace eShop.Domain.Test._Builders
         public ProductBuilder WithDescription(string description)
         {
             this.description = description;
-            return this;
-        }
-
-        public ProductBuilder WithPhotos(List<string> photos)
-        {
-            this.photos = photos;
             return this;
         }
 
