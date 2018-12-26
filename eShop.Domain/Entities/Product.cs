@@ -10,36 +10,25 @@ namespace eShop.Domain.Entities
         public decimal Price { get; private set; }
         public string Brand { get; private set; }
         public int CategoryId { get; private set; }
-        public List<string> Photos { get; private set; }
 
-        public virtual Category Category { get; set; }
+        public virtual Category Category { get; private set; }
 
-        public Product(string title, string description, decimal price, string brand, int categoryId, List<string> photos)
+        private Product() { }
+
+        public Product(string title, string description, decimal price, string brand, int categoryId)
         {
             DomainValidator.New()
                 .When(string.IsNullOrEmpty(title), "Title is required")
                 .When(string.IsNullOrEmpty(description), "Description is required")
                 .When(price < 0, "Price must be equal or greater than zero")
                 .When(string.IsNullOrEmpty(brand), "Brand is required")
-                .When(categoryId <= 0, "Category is required")
-                .When(photos == null, "Photos is required")
-                .When(photos.Count == 0, "Product must have at least one photo");
+                .When(categoryId <= 0, "Category is required");
 
             this.Title = title;
             this.Description = description;
             this.Price = price;
             this.Brand = brand;
             this.CategoryId = categoryId;
-            this.Photos = photos;
         }
-
-        public Product()
-        {
-            
-        }
-    }
-
-    public class Category
-    {
     }
 }

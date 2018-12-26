@@ -17,6 +17,7 @@ namespace eShop.Domain.Entities
 
         public virtual ICollection<Order> Orders { get; private set; }
 
+        private Customer() {  }
         public Customer(string name, string streetAddress, string city, string state, string zipCode, string country, string documentNumber, string email, string phone)
         {
             DomainValidator.New()

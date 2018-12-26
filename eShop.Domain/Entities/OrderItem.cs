@@ -4,12 +4,16 @@ namespace eShop.Domain.Entities
 {
     public class OrderItem : BaseEntity
     {
-        public int Quantity { get; set; }
-        public Product Product { get; set; }
-        public decimal Subtotal { get; set; }
-        public decimal Discount { get; set; }
-        public decimal Total { get; set; }
+        public int Quantity { get; private set; }
+        public int OrderId { get; private set; }
+        public Product Product { get; private set; }
+        public decimal Subtotal { get; private set; }
+        public decimal Discount { get; private set; }
+        public decimal Total { get; private set; }
+
+        public virtual Order Order { get; private set; }
         
+        private OrderItem() { }
         public OrderItem(int quantity, Product product, decimal discount)
         {
             var domainValidator = DomainValidator.New();

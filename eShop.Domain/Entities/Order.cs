@@ -19,6 +19,8 @@ namespace eShop.Domain.Entities
         public virtual Payment Payment { get; private set; }
         public virtual Customer Customer { get; private set; }
 
+        private Order() { }
+
         public Order(int customerId, ICollection<OrderItem> orderItems)
         {
             DomainValidator.New()
@@ -75,12 +77,5 @@ namespace eShop.Domain.Entities
         //     Discount = discount;
         //     CalculateOrderTotal();
         // }
-    }
-
-    public class Payment : BaseEntity
-    {
-        public Payment()
-        {
-        }
     }
 }
