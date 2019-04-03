@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using eShop.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,5 +14,15 @@ namespace eShop.Persistence
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Product> Products { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
+
+        public async Task Commit()
+        {
+            await SaveChangesAsync();
+        }
     }
 }

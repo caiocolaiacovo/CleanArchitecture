@@ -5,16 +5,16 @@ namespace eShop.Persistence
 {
     public class Repository<T> : IRepository<T> where T : BaseEntity
     {
-        private readonly ApplicationDbContext context;
+        private readonly ApplicationDbContext Context;
 
         public Repository(ApplicationDbContext context)
         {
-            this.context = context;
+            Context = context;
         }
 
         public void Add(T entity)
         {
-            throw new System.NotImplementedException();
+            Context.Set<T>().Add(entity);
         }
 
         public void Update(T entity)
