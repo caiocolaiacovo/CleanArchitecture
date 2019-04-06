@@ -14,6 +14,7 @@ namespace eShop.DI
             services.AddDbContext<eShop.Persistence.ApplicationDbContext>(options => options.UseSqlServer(connectionString));
             services.AddSingleton(typeof(IRepository<>), typeof(Repository<>));
             services.AddSingleton(typeof(ICategoryRepository), typeof(CategoryRepository));
+            services.AddSingleton(typeof(IUnitOfWork), typeof(eShop.Persistence.UnitOfWork));
         }
     }
 }
