@@ -45,7 +45,7 @@ namespace eShop.Domain.Test
         [Fact]
         public void Should_Not_Create_An_Order_Without_CustomerId()
         {
-            Assert.Throws<DomainException>(() => OrderBuilder.New().WithCustomerId(0).Build()).WithMessage("CustomerId is required");
+            Assert.Throws<DomainException>(() => OrderBuilder.New().WithCustomerId(0).Build()).WithMessage("Customer is required");
         }
 
         [Fact]

@@ -1,11 +1,11 @@
 using eShop.Domain.Entities;
 using eShop.Domain.Interfaces;
 
-namespace eShop.Persistence
+namespace eShop.Persistence.Repositories
 {
     public class Repository<T> : IRepository<T> where T : BaseEntity
     {
-        private readonly ApplicationDbContext Context;
+        protected readonly ApplicationDbContext Context;
 
         public Repository(ApplicationDbContext context)
         {

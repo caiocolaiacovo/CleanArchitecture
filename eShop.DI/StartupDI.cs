@@ -1,7 +1,9 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
-using eShop.Persistence;
+using Microsoft.Extensions.Configuration;
+using eShop.Persistence.Repositories;
 using eShop.Domain.Interfaces;
+using eShop.Domain.Entities;
 
 namespace eShop.DI
 {
@@ -9,8 +11,9 @@ namespace eShop.DI
     {
         public static void Configure(IServiceCollection services, string connectionString)
         {
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(connectionString));
+            services.AddDbContext<eShop.Persistence.ApplicationDbContext>(options => options.UseSqlServer(connectionString));
             services.AddSingleton(typeof(IRepository<>), typeof(Repository<>));
+            services.AddSingleton(typeof(ICategoryRepository), typeof(CategoryRepository));
         }
     }
 }

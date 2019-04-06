@@ -8,7 +8,6 @@ namespace eShop.Domain.Entities
 
         public virtual ICollection<Product> Products { get; private set; }
 
-
         private Category() { }
     }
 }

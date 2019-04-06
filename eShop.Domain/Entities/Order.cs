@@ -24,7 +24,7 @@ namespace eShop.Domain.Entities
         public Order(int customerId, ICollection<OrderItem> orderItems)
         {
             DomainValidator.New()
-                .When(customerId == 0, "CustomerId is required")
+                .When(customerId == 0, "Customer is required")
                 .When(orderItems == null || orderItems.Count == 0, "OrderItems is required");
 
             this.CustomerId = customerId;
@@ -32,7 +32,7 @@ namespace eShop.Domain.Entities
 
             CalculateTotalItems();
         }
-
+        
         private void CalculateTotalItems()
         {
             decimal subtotalItems = 0;
