@@ -1,4 +1,6 @@
+using eShop.Domain._Base;
 using eShop.Domain._Util;
+using eShop.Domain.Products;
 
 namespace eShop.Domain.Entities
 {

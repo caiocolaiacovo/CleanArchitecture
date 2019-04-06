@@ -1,6 +1,6 @@
-using eShop.Domain.Entities;
-using eShop.Domain.Interfaces;
 using System.Linq;
+using eShop.Domain.Categories;
+using eShop.Persistence.Contexts;
 
 namespace eShop.Persistence.Repositories
 {

@@ -1,5 +1,5 @@
-using eShop.Domain.Entities;
-using eShop.Domain.Interfaces;
+using eShop.Domain._Base;
+using eShop.Persistence.Contexts;
 
 namespace eShop.Persistence.Repositories
 {

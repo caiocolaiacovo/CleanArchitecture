@@ -1,5 +1,5 @@
 using eShop.Domain.Entities;
-using eShop.Domain.Exceptions;
+using eShop.Domain._Exceptions;
 using eShop.Domain.Test._Builders;
 using eShop.Domain.Test._Util;
 using ExpectedObjects;

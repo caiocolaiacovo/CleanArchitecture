@@ -1,4 +1,4 @@
-using eShop.Domain.Exceptions;
+using eShop.Domain._Exceptions;
 using Xunit;
 
 namespace eShop.Domain.Test._Util

@@ -1,6 +1,7 @@
+using eShop.Domain._Base;
 using eShop.Domain.Entities;
 
-namespace eShop.Domain.Interfaces
+namespace eShop.Domain.Categories
 {
     public interface ICategoryRepository : IRepository<Category>
     {

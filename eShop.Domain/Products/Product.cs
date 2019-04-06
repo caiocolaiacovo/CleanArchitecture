@@ -1,7 +1,9 @@
 using System.Collections.Generic;
+using eShop.Domain._Base;
 using eShop.Domain._Util;
+using eShop.Domain.Categories;
 
-namespace eShop.Domain.Entities
+namespace eShop.Domain.Products
 {
     public class Product : BaseEntity
     {

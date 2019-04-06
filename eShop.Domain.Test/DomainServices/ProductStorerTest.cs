@@ -1,8 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using eShop.Domain.Entities;
-using eShop.Domain.Interfaces;
+using eShop.Domain.Products;
 using Moq;
 using Xunit;
 
@@ -11,7 +10,7 @@ namespace eShop.Domain.Test.DomainServices
     public class ProductStorerTest
     {
         [Fact]
-        public void Should_Store_A_Product()
+        public void Should_Store_Product()
         {
             var productDto = new ProductDto {
                 title = "title",
@@ -21,13 +20,13 @@ namespace eShop.Domain.Test.DomainServices
                 categoryId = 1,
             };
 
-            var productRepositoryMock = new Mock<IProductRepository>();
+            var productRepository = new Mock<IProductRepository>();
 
-            var productStorer = new ProductStorer(productRepositoryMock.Object);
+            var productStorer = new ProductStorer(productRepository.Object);
 
             productStorer.Store(productDto);
 
-            productRepositoryMock.Verify(r => r.Add(It.Is<Product>(p => p.Title == productDto.title)), Times.Once);
+            productRepository.Verify(r => r.Add(It.Is<Product>(p => p.Title == productDto.title)), Times.Once);
         }
     }
 

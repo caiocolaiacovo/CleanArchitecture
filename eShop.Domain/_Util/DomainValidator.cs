@@ -1,4 +1,4 @@
-using eShop.Domain.Exceptions;
+using eShop.Domain._Exceptions;
 
 namespace eShop.Domain._Util
 {

@@ -1,6 +1,6 @@
 using System;
 
-namespace eShop.Domain.Entities
+namespace eShop.Domain._Base
 {
     public class BaseEntity
     {

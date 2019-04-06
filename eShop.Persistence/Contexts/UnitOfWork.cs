@@ -1,7 +1,8 @@
 using System.Threading.Tasks;
-using eShop.Domain.Interfaces;
+using eShop.Domain._Base;
+using eShop.Persistence.Contexts;
 
-namespace eShop.Persistence
+namespace eShop.Persistence.Contexts
 {
     public class UnitOfWork : IUnitOfWork
     {

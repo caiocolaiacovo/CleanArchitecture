@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using eShop.Domain._Base;
 using eShop.Domain._Util;
 
 namespace eShop.Domain.Entities

@@ -2,7 +2,7 @@ using System;
 using Xunit;
 using ExpectedObjects;
 using eShop.Domain.Entities;
-using eShop.Domain.Exceptions;
+using eShop.Domain._Exceptions;
 using Bogus;
 using eShop.Domain.Test._Builders;
 using eShop.Domain.Test._Util;

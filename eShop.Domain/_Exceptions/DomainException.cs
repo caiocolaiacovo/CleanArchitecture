@@ -1,6 +1,6 @@
 using System;
 
-namespace eShop.Domain.Exceptions
+namespace eShop.Domain._Exceptions
 {
     public class DomainException : ArgumentException
     {

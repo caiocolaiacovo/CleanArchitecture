@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using Bogus;
 using eShop.Domain.Entities;
+using eShop.Domain.Products;
 
 namespace eShop.Domain.Test._Builders
 {
