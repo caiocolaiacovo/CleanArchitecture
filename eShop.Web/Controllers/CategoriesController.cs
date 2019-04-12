@@ -10,6 +10,10 @@ namespace eShop.Web.Controllers
     [ApiController]
     public class CategoriesController : ControllerBase
     {
+        public CategoriesController()
+        {
+            
+        }
         // GET api/categories
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
