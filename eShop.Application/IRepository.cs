@@ -1,4 +1,4 @@
-namespace eShop.Domain._Base
+namespace eShop.Application
 {
     public interface IRepository<T> where T : class
     {

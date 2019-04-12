@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using eShop.DI;
-using eShop.Domain._Base;
+// using eShop.Domain._Base;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -38,8 +38,8 @@ namespace eShop.Web
             app.Use(async (context, next) => {
                 await next.Invoke();
 
-                var unitOfWork = (IUnitOfWork)context.RequestServices.GetService(typeof(IUnitOfWork));
-                await unitOfWork.Commit();
+                // var unitOfWork = (IUnitOfWork)context.RequestServices.GetService(typeof(IUnitOfWork));
+                // await unitOfWork.Commit();
             });
 
             if (env.IsDevelopment())

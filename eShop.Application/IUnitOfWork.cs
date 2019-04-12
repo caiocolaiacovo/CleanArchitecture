@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace eShop.Domain._Base
+namespace eShop.Application
 {
     public interface IUnitOfWork
     {
